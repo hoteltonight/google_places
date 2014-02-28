@@ -182,7 +182,7 @@ module GooglePlaces
     end
 
     # Radar Search Service allows you to search for up to 200 Places at once, but with less detail than is typically returned from a Text Search or Nearby Search request. The search response will include up to 200 Places, identified only by their geographic coordinates and reference. You can send a Place Details request for more information about any of them.
-    # 
+    #
     # @return [Array<Spot>]
     # @param [String,Integer] lat the latitude for the search
     # @param [String,Integer] lng the longitude for the search
@@ -205,12 +205,12 @@ module GooglePlaces
     # @option options [Integer] :maxprice
     #   Restricts results to only those places within the specified price range. Valid values range between 0 (most affordable) to 4 (most expensive), inclusive.
     # @option options [Boolean] :opennow
-    #   Retricts results to those Places that are open for business at the time the query is sent. 
-    #   Places that do not specify opening hours in the Google Places database will not be returned if you include this parameter in your query. 
+    #   Retricts results to those Places that are open for business at the time the query is sent.
+    #   Places that do not specify opening hours in the Google Places database will not be returned if you include this parameter in your query.
     #   Setting openNow to false has no effect.
     # @option options [Boolean] :zagatselected
-    #   Restrict your search to only those locations that are Zagat selected businesses. 
-    #   This parameter does not require a true or false value, simply including the parameter in the request is sufficient to restrict your search. 
+    #   Restrict your search to only those locations that are Zagat selected businesses.
+    #   This parameter does not require a true or false value, simply including the parameter in the request is sufficient to restrict your search.
     #   The zagatselected parameter is experimental, and only available to Places API enterprise customers.
     #
     # @see https://developers.google.com/places/documentation/search#RadarSearchRequests
@@ -218,5 +218,8 @@ module GooglePlaces
       Spot.list_by_radar(lat, lng, @api_key, @sensor, @options.merge(options))
     end
 
+    def predictions_by_input(input, options = {})
+      Prediction.list_by_input(input, @api_key, @options.merge(options))
+    end
   end
 end
