@@ -14,7 +14,7 @@ describe GooglePlaces::Prediction, '.list_by_input' do
       GooglePlaces::Request.stub(:predictions_by_input).and_return('predictions' => [])
     end
 
-    it "initiates a request with `location`" do
+    it "initiates a request with `location` and a default `radius`" do
       GooglePlaces::Request.should_receive(:predictions_by_input).with do |options|
         options[:location].should eq('1.00000000,2.00000000')
         options[:radius].should eq(GooglePlaces::Prediction::DEFAULT_RADIUS)
