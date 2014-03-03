@@ -62,5 +62,13 @@ describe GooglePlaces::Prediction, '.list_by_input' do
 
       GooglePlaces::Prediction.list_by_input('query', api_key, types: ['establishment', 'geocode'])
     end
+
+    it "initiates a request with `retry_options`" do
+      GooglePlaces::Request.should_receive(:predictions_by_input).with do |options|
+        options[:retry_options].should eq(max: 10, delay: 15)
+      end
+
+      GooglePlaces::Prediction.list_by_input('query', api_key, retry_options: { max: 10, delay: 15 })
+    end
   end
 end
