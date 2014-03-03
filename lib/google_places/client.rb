@@ -218,6 +218,26 @@ module GooglePlaces
       Spot.list_by_radar(lat, lng, @api_key, @sensor, @options.merge(options))
     end
 
+    # Query for Place Predictions
+    #
+    # @return [Array<Prediction>]
+    # @param [String] query the query to search for
+    # @param [Hash] options
+    # @option options [String,Integer] lat the latitude for the search
+    # @option options [String,Integer] lng the longitude for the search
+    # @option options [Integer] :radius (1000)
+    #   Defines the distance (in meters) within which to return Place results.
+    #   The maximum allowed radius is 50,000 meters.
+    #   Note that radius must not be included if :rankby => 'distance' (described below) is specified.
+    #   <b>Note that this is a mandatory parameter</b>
+    # @option options [Boolean] :sensor (false)
+    #   Indicates whether or not the Place request came from a device using a location sensor (e.g. a GPS) to determine the location sent in this request.
+    #   <b>Note that this is a mandatory parameter</b>
+    # @option options [String,Array] :types
+    #   Restricts the results to Spots matching at least one of the specified types
+    #
+    # @see http://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1 List of supported languages
+    # @see https://developers.google.com/maps/documentation/places/supported_types List of supported types
     def predictions_by_input(input, options = {})
       Prediction.list_by_input(input, @api_key, @options.merge(options))
     end

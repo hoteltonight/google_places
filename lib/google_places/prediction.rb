@@ -1,5 +1,8 @@
 module GooglePlaces
   class Prediction
+    DEFAULT_RADIUS = 1000
+    DEFAULT_SENSOR = false
+
     attr_accessor(
       :description,
       :id,
@@ -13,11 +16,28 @@ module GooglePlaces
     end
 
     def self.list_by_input(input, api_key, options = {})
+      lat = options.delete(:lat)
+      lng = options.delete(:lng)
+      radius = options.delete(:radius) || DEFAULT_RADIUS
+      sensor = options.delete(:sensor) || DEFAULT_SENSOR
+      types  = options.delete(:types)
+
       options = {
         :input => input,
-        :sensor => false,
-        :key => api_key
+        :sensor => sensor,
+        :key => api_key,
       }
+
+      if lat && lng
+        options[:location] = Location.new(lat, lng).format
+        options[:radius] = radius
+      end
+
+      # Accept Types as a string or array
+      if types
+        types = (types.is_a?(Array) ? types.join('|') : types)
+        options[:types] = types
+      end
 
       request(:predictions_by_input, options)
     end

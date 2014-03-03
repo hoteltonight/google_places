@@ -192,6 +192,20 @@ module GooglePlaces
       request.parsed_response
     end
 
+    # Query for Place Predictions
+    #
+    # @return [Array<Prediction>]
+    # @param [String] api_key the provided api key
+    # @param [Hash] options
+    # @option options [String,Array<String>] :exclude ([])
+    #   A String or an Array of <b>types</b> to exclude from results
+    # @option options [Hash] :retry_options ({})
+    #   A Hash containing parameters for search retries
+    # @option options [Object] :retry_options[:status] ([])
+    # @option options [Integer] :retry_options[:max] (0) the maximum retries
+    # @option options [Integer] :retry_options[:delay] (5) the delay between each retry in seconds
+    #
+    # @see https://developers.google.com/maps/documentation/places/supported_types List of supported types
     def self.predictions_by_input(options = {})
       request = new(AUTOCOMPLETE_URL, options)
       request.parsed_response
