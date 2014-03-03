@@ -41,7 +41,7 @@ http_interactions:
   recorded_at: Fri, 28 Feb 2014 14:24:17 GMT
 - request:
     method: get
-    uri: https://maps.googleapis.com/maps/api/place/autocomplete/json?input=query&sensor=false&key=AIzaSyDPVYhZDzHdxRGnqqHZSWccL-BEe-JSYXA
+    uri: https://maps.googleapis.com/maps/api/place/autocomplete/json?input=query&sensor=false&key=abc123
     body:
       encoding: US-ASCII
       string: ''
