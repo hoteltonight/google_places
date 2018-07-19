@@ -303,6 +303,10 @@ module GooglePlaces
       Prediction.list_by_input(input, @api_key, @options.merge(options))
     end
 
+    def reverse_geocode_by_place_id(place_id, options = {})
+      Geocoder.reverse_geocode_by_place_id(place_id, @api_key, @options.merge(options))
+    end
+
     private
 
     def collection_detail_level(spots, detail = false)

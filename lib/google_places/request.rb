@@ -8,13 +8,15 @@ module GooglePlaces
     include ::HTTParty
     format :json
 
-    NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-    DETAILS_URL       = 'https://maps.googleapis.com/maps/api/place/details/json'
-    PHOTO_URL         = 'https://maps.googleapis.com/maps/api/place/photo'
-    TEXT_SEARCH_URL   = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
-    PAGETOKEN_URL     = 'https://maps.googleapis.com/maps/api/place/search/json'
-    RADAR_SEARCH_URL  = 'https://maps.googleapis.com/maps/api/place/radarsearch/json'
-    AUTOCOMPLETE_URL  = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
+    NEARBY_SEARCH_URL   = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
+    DETAILS_URL         = 'https://maps.googleapis.com/maps/api/place/details/json'
+    PHOTO_URL           = 'https://maps.googleapis.com/maps/api/place/photo'
+    TEXT_SEARCH_URL     = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
+    PAGETOKEN_URL       = 'https://maps.googleapis.com/maps/api/place/search/json'
+    RADAR_SEARCH_URL    = 'https://maps.googleapis.com/maps/api/place/radarsearch/json'
+    AUTOCOMPLETE_URL    = 'https://maps.googleapis.com/maps/api/place/autocomplete/json'
+    REVERSE_GEOCODE_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
+
 
     # Search for Spots at the provided location
     #
@@ -226,6 +228,15 @@ module GooglePlaces
     # @see https://developers.google.com/maps/documentation/places/supported_types List of supported types
     def self.spots_by_pagetoken(options = {})
       request = new(PAGETOKEN_URL, options)
+      request.parsed_response
+    end
+
+    # Query for Geocode information by place id
+    #
+    # @return [Spot]
+    # @param
+    def self.reverse_geocode_by_place_id(options)
+      request = new(REVERSE_GEOCODE_URL, options)
       request.parsed_response
     end
 
